@@ -1,4 +1,4 @@
-header {
+/* header {
     background: white;
     height: 70px;
     width: 100%;
@@ -8,4 +8,51 @@ header .logo {
     background: url("../images/logo.png") no-repeat;
     left: 20px;
     height: 100%;
+    width: 80%;
+    float: left;
 }
+#api_status {
+    float: right;
+    margin-right: 30px;
+    background-color: #cccccc;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.available {
+    background-color: #ff545f;
+}
+
+
+ */
+
+ header {
+    background: white;
+    height: 70px;
+    width: 100%;
+    border-bottom: 1px solid #CCCCCC;
+    display: flex; /* Use flexbox */
+    align-items: center; /* Center items vertically */
+}
+
+header .logo {
+    background: url("../images/logo.png") no-repeat;
+    margin-left: 20px; /* Adjust margin instead of left */
+    height: 100%;
+    width: 80%;
+    flex-grow: 1; /* Allow the logo to grow to fill remaining space */
+}
+
+#api_status {
+    margin-right: 30px;
+    background-color: #cccccc;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.available {
+    background-color: #ff545f;
+}
+
