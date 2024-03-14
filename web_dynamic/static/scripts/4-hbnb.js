@@ -63,20 +63,28 @@ $(document).ready(function () {
       } else {
         $(".amenities h4").text(str);
       }
+      // Update UI based on amenities clicked
+      amenityIDs = [];
+      for (key in window.arr) {
+        amenityIDs.push(key);
+      }
+      // console.log(amenityIDs);
+      loadAllPlaces([], [], amenityIDs);
     });
   }
   /*
    load all places
    Data to be sent in the request body.
    */
-  function loadAllPlaces() {
+  function loadAllPlaces(data1 = [], data2 = [], data3 = []) {
     let requestData = {
-      states: [],
-      cities: [],
+      states: data1,
+      cities: data2,
       // Add amenities if needed
-      amenities: [],
+      amenities: data3,
     };
-
+    console.log("Loading amenities");
+    console.log(JSON.stringify(requestData));
     // Making the AJAX POST request
     $.ajax({
       url: "http://localhost:5001/api/v1/places_search",
@@ -86,10 +94,11 @@ $(document).ready(function () {
       success: function (data, status) {
         console.log("Response:", data);
         // Handle the response data here
-        for (let key in data) {
-          console.log(data[key]);
-          place = data[key];
-          let newEl = `
+        if (data.length !== 0) {
+          for (let key in data) {
+            console.log(data[key]);
+            place = data[key];
+            let newEl = `
           <article class="left">
           <div class="title_box">
           <h2>${place.name}</h2>
@@ -97,21 +106,31 @@ $(document).ready(function () {
           </div>
           <div class="information">
           <div class="max_guest">${place.max_guest} Guest${
-            place.max_guest != 1 ? `s` : ""
-          }</div>
+              place.max_guest != 1 ? `s` : ""
+            }</div>
           <div class="number_rooms">${place.number_rooms} Bedroom${
-            place.number_rooms != 1 ? `s` : ""
-          }</div>
+              place.number_rooms != 1 ? `s` : ""
+            }</div>
           <div class="number_bathrooms">${place.number_bathrooms} Bathroom${
-            place.number_bathrooms != 1 ? `s` : ""
-          }</div>
+              place.number_bathrooms != 1 ? `s` : ""
+            }</div>
           </div>
           <div class="description">
           ${place.description}
           </div>
           </article>
           `;
-          $(".places").append(newEl);
+            $(".places").append(newEl);
+          }
+        } else {
+          // let newEl = `
+          // <article class="left">
+          // fake
+          // </article>
+          // `;
+          // $(".places").append(newEl);
+          console.log("runnig");
+          $("section .places").css("display", "none");
         }
       },
       error: function (xhr, status, error) {
@@ -120,6 +139,9 @@ $(document).ready(function () {
       },
     });
   }
+  /* 
+    apply filters
+  */
   // functions to call on load
   checkAppStatus();
   filterAmenityByClicks();

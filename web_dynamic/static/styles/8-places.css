@@ -5,6 +5,7 @@
     padding: 0 20px;
     margin-top: 1%;
     margin-bottom: 8%;
+    display: inline-table;
 }
 @media only screen and (max-width: 920px)
 {
@@ -102,4 +103,12 @@
 
 .checkbox {
     margin-right: 10px;
+}
+
+.left {
+    float: left;
+}
+
+.hide {
+    display: none;
 }

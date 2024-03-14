@@ -124,6 +124,7 @@ def places_search():
     Retrieves all Place objects depending of the JSON in the body
     of the request
     """
+    print(request.get_json())
 
     if request.get_json() is None:
         abort(400, description="Not a JSON")
@@ -178,3 +179,8 @@ def places_search():
         places.append(d)
 
     return jsonify(places)
+
+
+@app_views.route('/status', methods=['GET'], strict_slashes=False)
+def app_stat():
+    return jsonify({"status": "OK"})

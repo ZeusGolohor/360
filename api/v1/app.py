@@ -21,12 +21,12 @@ def close_db(error):
     storage.close()
 
 
-@app.route('/status', strict_slashes=False)
-def status():
-    """
-    A method to check app status.
-    """
-    return (jsonify({"status": "OK"}), 200)
+# @app.route('/3-hbnb/', strict_slashes=False)
+# def get_places():
+#     """
+#     A method to check app status.
+#     """
+#     return (jsonify({"status": "OK"}), 200)
 
 
 @app.errorhandler(404)
@@ -56,4 +56,4 @@ if __name__ == "__main__":
         host = '0.0.0.0'
     if not port:
         port = '5000'
-    app.run(host=host, port=port, threaded=True)
+    app.run(host=host, port=port, threaded=True, debug=True)
