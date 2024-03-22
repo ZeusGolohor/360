@@ -1,1 +1,1 @@
-jzamora5
+pip install Flask Flask-Admin Flask-AdminLTE3

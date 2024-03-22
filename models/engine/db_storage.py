@@ -11,13 +11,16 @@ from models.place import Place
 from models.review import Review
 from models.state import State
 from models.user import User
+from models.bookmark import BookMark
+from models.country import Country
 from os import getenv
 import sqlalchemy
 from sqlalchemy import create_engine, desc
 from sqlalchemy.orm import scoped_session, sessionmaker
 
 classes = {"Amenity": Amenity, "City": City,
-           "Place": Place, "Review": Review, "State": State, "User": User}
+           "Place": Place, "Review": Review, "State": State, "User": User,
+           "BookMark": BookMark, "Country": Country}
 
 
 class DBStorage:
@@ -27,17 +30,17 @@ class DBStorage:
 
     def __init__(self):
         """Instantiate a DBStorage object"""
-        HBNB_MYSQL_USER = getenv('HBNB_MYSQL_USER')
-        HBNB_MYSQL_PWD = getenv('HBNB_MYSQL_PWD')
-        HBNB_MYSQL_HOST = getenv('HBNB_MYSQL_HOST')
-        HBNB_MYSQL_DB = getenv('HBNB_MYSQL_DB')
-        HBNB_ENV = getenv('HBNB_ENV')
+        MYSQL_USER = getenv('MYSQL_USER')
+        MYSQL_PWD = getenv('MYSQL_PWD')
+        MYSQL_HOST = getenv('MYSQL_HOST')
+        MYSQL_DB = getenv('MYSQL_DB')
+        ENV = getenv('ENV')
         self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.
-                                      format(HBNB_MYSQL_USER,
-                                             HBNB_MYSQL_PWD,
-                                             HBNB_MYSQL_HOST,
-                                             HBNB_MYSQL_DB))
-        if HBNB_ENV == "test":
+                                      format(MYSQL_USER,
+                                             MYSQL_PWD,
+                                             MYSQL_HOST,
+                                             MYSQL_DB))
+        if ENV == "test":
             Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):

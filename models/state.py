@@ -3,6 +3,7 @@
 import models
 from models.base_model import BaseModel, Base
 from models.city import City
+from models.country import Country
 from os import getenv
 import sqlalchemy
 from sqlalchemy import Column, String, ForeignKey
@@ -14,6 +15,12 @@ class State(BaseModel, Base):
     if models.storage_t == "db":
         __tablename__ = 'states'
         name = Column(String(128), nullable=False)
+        # adding a country to the state
+        country_id = Column(String(60), ForeignKey('countries.id'), nullable=False)
+        # add a country relationship
+        country = relationship("Country",
+                               backref="states",
+                               cascade="all, delete")
         cities = relationship("City",
                               backref="state",
                               cascade="all, delete, delete-orphan")

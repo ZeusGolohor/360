@@ -4,6 +4,8 @@
 import cmd
 from datetime import datetime
 import models
+from models import storage
+from models.country import Country
 from models.amenity import Amenity
 from models.base_model import BaseModel
 from models.city import City
@@ -11,15 +13,19 @@ from models.place import Place
 from models.review import Review
 from models.state import State
 from models.user import User
+from models.bookmark import BookMark
 import shlex  # for splitting the line along spaces except in double quotes
 
 classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
-           "Place": Place, "Review": Review, "State": State, "User": User}
+           "Place": Place, "Review": Review, "State": State, "User": User,
+           "BookMark": BookMark, "Country": Country}
 
 
-class HBNBCommand(cmd.Cmd):
-    """ HBNH console """
-    prompt = '(hbnb) '
+class RentHubCommand(cmd.Cmd):
+    """ RentHub console """
+    prompt = '(RentHub) '
+    """ Reload th databse """
+    storage.reload()
 
     def do_EOF(self, arg):
         """Exits console"""
@@ -39,8 +45,10 @@ class HBNBCommand(cmd.Cmd):
         for arg in args:
             if "=" in arg:
                 kvp = arg.split('=', 1)
-                key = kvp[0]
-                value = kvp[1]
+                # modify args, replace ' with "
+                key = kvp[0].replace("'", '"')
+                # modify args, replace ' with "
+                value = kvp[1].replace("'", '"')
                 if value[0] == value[-1] == '"':
                     value = shlex.split(value)[0].replace('_', ' ')
                 else:
@@ -110,9 +118,25 @@ class HBNBCommand(cmd.Cmd):
         args = shlex.split(arg)
         obj_list = []
         if len(args) == 0:
+            # reloading the storage every it is instantiated.
+            storage.reload()
             obj_dict = models.storage.all()
         elif args[0] in classes:
+            # reloading the storage every it is instantiated.
+            storage.reload()
             obj_dict = models.storage.all(classes[args[0]])
+            # To get a specific instance
+            try:
+                if (args[1]):
+                    for key, ins in obj_dict.items():
+                        if (ins.id == args[1]):
+                            new_dict = {}
+                            new_dict[key] = ins
+                            obj_dict = new_dict
+                            continue
+            except Exception:
+                pass
+                    
         else:
             print("** class doesn't exist **")
             return False
@@ -161,4 +185,4 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
 if __name__ == '__main__':
-    HBNBCommand().cmdloop()
+    RentHubCommand().cmdloop()

@@ -20,6 +20,8 @@ class User(BaseModel, Base):
         last_name = Column(String(128), nullable=True)
         places = relationship("Place", backref="user")
         reviews = relationship("Review", backref="user")
+        # used to retrive user bookmarks
+        bookmarks = relationship("BookMark", backref="user")
     else:
         email = ""
         password = ""
@@ -35,3 +37,19 @@ class User(BaseModel, Base):
         if name == "password":
             value = md5(value.encode()).hexdigest()
         super().__setattr__(name, value)
+
+
+    # Adding relationship for file storage.
+    if models.storage_t != 'db':
+        @property
+        def bookmarks(self):
+            """
+            getter attribute return the list of BookMark instances.
+            """
+            from models.bookmark import BookMark
+            bookmark_list = []
+            all_bookmark = models.storage.all(BookMark)
+            for bookmark in all_bookmark.values():
+                if bookmark.user_id == self.id:
+                    bookmark_list.append(bookmark)
+            return (bookmark)
