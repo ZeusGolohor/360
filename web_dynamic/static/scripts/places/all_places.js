@@ -41,13 +41,13 @@ $(document).ready(function () {
             </ol>
             <div class="carousel-inner place_list_img">
                   <div class="carousel-item active">
-                    <img class="d-block w-100" src="../static/images/dark-color-interiors-1200x520.jpg?{{ cache_id}}" alt="First slide">
+                    <img class="d-block w-100 all_place_img" src="../static/images/dark-color-interiors-1200x520.jpg?{{ cache_id}}" alt="First slide">
                   </div>
                   <div class="carousel-item">
-                    <img class="d-block w-100" src="../static/images/spiderman-001.jpg?{{ cache_id}}" alt="Second slide">
+                    <img class="d-block w-100 all_place_img" src="../static/images/spiderman-001.jpg?{{ cache_id}}" alt="Second slide">
                   </div>
                   <div class="carousel-item">
-                    <img class="d-block w-100" src="../static/images/edyta-and-co-layout-1549663065.jpg?{{ cache_id}}" alt="Third slide">
+                    <img class="d-block w-100 all_place_img" src="../static/images/edyta-and-co-layout-1549663065.jpg?{{ cache_id}}" alt="Third slide">
                   </div>
                 </div>
                 <a class="carousel-control-prev" href="#place_${
@@ -69,7 +69,7 @@ $(document).ready(function () {
             <div class="row">
             <div class="col-6 text-center">
                 <div class="col-12">
-                <!-- <i class="nav-icon fas fa-star text-danger"></i> -->
+                <i class="fas fa-lg fa-solid fa-bed"></i>
                 </div>
                 <div class="col-12">
                     <p>${place.number_rooms} bedroom${
@@ -79,7 +79,7 @@ $(document).ready(function () {
             </div>
             <div class="col-6 text-center">
                 <div class="col-12">
-                <!-- <i class="nav-icon fas fa-star text-danger"></i> -->
+                <i class="fas fa-lg fa-solid fa-shower"></i>
                 </div>
                 <div class="col-12">
                 <p>${place.number_bathrooms} bathroom${
@@ -87,30 +87,24 @@ $(document).ready(function () {
             } </p>
                 </div>
             </div>
-          <!--  <div class="col-6 text-center">
-                <div class="col-12">
-                <i class="nav-icon fas fa-star text-danger"></i>
-                </div>
-                <div class="col-12">
-                    <p>text</p>
-                </div>
-            </div>
-            <div class="col-6 text-center">
-                <div class="col-12">
-                <i class="nav-icon fas fa-star text-danger"></i>
-                </div>
-                <div class="col-12">
-                    <p>text</p>
-                </div>
-            </div> -->
             </div>
             <div class="row">
             <div class="col-6">
             <!-- <i class="nav-icon fas fa-star text-danger"></i> -->
-            <h3>$ 250,000.00</h3>
+            <h5>$ ${place.price_by_night}</h5>
             </div>
             <div class="col-6">
-            <a href="#" class="btn btn-info float-right">View Property</a>
+            <a href="http://localhost:5000/places/${
+              place.id
+            }" class="btn btn-info float-right">View Property</a>
+            </div>
+            </div>
+            <div class="row">
+            <div class="col-4">
+            <i class="nav-icon fas fa-star text-danger"></i>
+            </div>
+            <div class="col-8 text-right">
+            <p>Posted at: ${place.created_at}</p>
             </div>
             </div>
             </div>

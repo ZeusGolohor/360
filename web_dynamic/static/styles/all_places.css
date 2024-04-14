@@ -1,5 +1,5 @@
 .place_list_img {
-    height: 210px;
+    height: 289px;
 }
 .place_list_img2 {
     height: 455px;
@@ -10,3 +10,8 @@
 .float-right {
     float: right;
 }
+
+.all_place_img {
+    height: 287px;
+}
+

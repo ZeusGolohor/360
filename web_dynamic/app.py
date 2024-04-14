@@ -5,18 +5,22 @@ registering blueprints.
 """
 from flask import Flask, jsonify, request
 from web_dynamic.routes import (
-    index_views
+    place_views,
+    auth_views,
+    admin_views,
     )
 # from models import storage
 import os
-# from flask_cors import CORS
+from flask_cors import CORS
 
 
 app = Flask(__name__)
 #  Adding CORS to our application
-# CORS(app, resources={r"/api/*": {"origins": "0.0.0.0"}})
+CORS(app, resources={r"/api/*": {"origins": "0.0.0.0"}})
 # Route Registration for the application
-app.register_blueprint(index_views)
+app.register_blueprint(place_views)
+app.register_blueprint(auth_views)
+app.register_blueprint(admin_views)
 # app.register_blueprint(state_views)
 # app.register_blueprint(city_views)
 # app.register_blueprint(amenity_views)

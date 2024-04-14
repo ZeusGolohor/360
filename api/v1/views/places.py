@@ -35,10 +35,11 @@ def get_place(place_id):
     Retrieves a Place object
     """
     place = storage.get(Place, place_id)
+
     if not place:
         abort(404)
 
-    return jsonify(place.to_dict())
+    return jsonify([place.to_dict(), place.user.to_dict()])
 
 
 @app_views.route('/places/<place_id>', methods=['DELETE'],
@@ -124,7 +125,7 @@ def places_search():
     Retrieves all Place objects depending of the JSON in the body
     of the request
     """
-    print(request.get_json())
+    # print(request.get_json())
 
     if request.get_json() is None:
         abort(400, description="Not a JSON")
