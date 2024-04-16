@@ -10,10 +10,69 @@ $(document).ready(function () {
   formData["number_rooms"] = $("#number_rooms").val();
   formData["number_bathrooms"] = $("#number_bathrooms").val();
   formData["price_by_night"] = $("#price_by_night").val();
+  formData["user_id"] = "1234";
 
   //  fuctions
+  // used to load the user
+  function loadUser(user) {
+    if (user) {
+      // console.log(user);
+      $("#user_info").empty();
+      let newEl = `
+      <a href="#" class="d-block">${user.first_name} ${user.last_name}</a>
+      `;
+      $("#user_info").append(newEl);
+    }
+  }
+  // Used to clear old form errors.
+  function clear_previous_errors(formData) {
+    for (let key in formData) {
+      $(`#${key}_error`).empty();
+    }
+  }
+  //   used to add new data to the database
   function create_property() {
-    console.log(JSON.parse(localStorage.getItem("formData")));
+    formData["errors"] = "false";
+    clear_previous_errors(formData);
+    check_len_0(formData);
+    console.log(formData["errors"]);
+    if (formData["errors"] === "false") {
+      let requestData = {
+        states: "State",
+        cities: "city",
+        // Add amenities if needed
+        amenities: "amenity",
+      };
+      console.log(JSON.parse(localStorage.getItem("formData")));
+      //creating the new property
+      $.ajax({
+        url: `http://localhost:5001/api/v1/cities/${formData["city"]}/places`,
+        type: "POST",
+        contentType: "application/json",
+        // "Access-Control-Allow-Origin": "*",
+        data: JSON.stringify({
+          user_id: "1aeb6fe0-4b11-48df-aff6-3dc83a6fece3",
+          city_id: "5ff38ea0-20d9-4947-9031-c1f3ad16892c",
+          name: formData["name"],
+          description: formData["description"],
+          state: formData["state"],
+          city: formData["city"],
+          number_rooms: formData["number_rooms"],
+          number_bathrooms: formData["number_bathrooms"],
+          // price_by_night: formData["price_by_night"],
+          price_by_night: Number(formData["price_by_night"]),
+          max_guest: 0,
+          latitude: 0,
+          longitude: 0,
+        }),
+        success: function (data, status) {
+          console.log(data);
+        },
+        error: function (xhr, status, error) {
+          console.error(error);
+        },
+      });
+    }
   }
   //   used to update fields
   function updateFormData(key, value) {
@@ -120,18 +179,9 @@ $(document).ready(function () {
       const el = $(this);
       loadStates(el[0].dataset);
     });
+    // used to clear form
     $("#clearForm").click(function (event) {
       localStorage.removeItem("formData");
-      //   formData["name"] = "";
-      //   formData["description"] = "";
-      //   formData["state"] = "";
-      //   formData["city"] = "";
-      //   formData["number_rooms"] = "";
-      //   formData["number_bathrooms"] = "";
-      //   formData["price_by_night"] = "";
-      //   for (key in formData) {
-      //     updateFormData(key, "");
-      //   }
       location.reload();
     });
     // $("#city").click(function (event) {
@@ -152,6 +202,18 @@ $(document).ready(function () {
     const jsonData = JSON.stringify(formData);
     localStorage.setItem("formData", jsonData);
   }
+  //   form checks
+  // checking for empty form
+  function check_len_0(formData) {
+    for (let key in formData) {
+      if (formData[key] === null) continue;
+      if (formData[key].length == 0) {
+        formData["errors"] = true;
+        $(`#${key}_error`).empty();
+        $(`#${key}_error`).append("Can not be empty");
+      }
+    }
+  }
   function binder() {
     const storedData = localStorage.getItem("formData");
     if (storedData) {
@@ -164,7 +226,8 @@ $(document).ready(function () {
         let ignore = ["errors", "loaded", "state", "city"];
         if (!ignore.includes(item)) {
           //   console.log(item);
-          document.getElementById(item).value = formData[item];
+          if (document.getElementById(item) !== null)
+            document.getElementById(item).value = formData[item];
         }
         // console.log(item.key);
         // document.getElementById(item.key).value = item.value;
@@ -177,4 +240,6 @@ $(document).ready(function () {
   //   binding all form fields to store
   bind(formData);
   binder();
+  // localStorage.clear();
+  loadUser(JSON.parse(localStorage.getItem("user")));
 });

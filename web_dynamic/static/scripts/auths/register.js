@@ -61,17 +61,21 @@ $(document).ready(function () {
       console.log("sending form");
       //creating the new user
       $.ajax({
-        url: `http://localhost:5001/api/v1/auths/register`,
+        url: `http://localhost:5001/api/v1/users`,
         type: "POST",
         contentType: "application/json",
         data: JSON.stringify(formData),
         success: function (data, status) {
-          console.log("User successfully created new User");
           console.log(data);
+          user = data;
+          localStorage.setItem("user", JSON.stringify(user));
+
+          window.location = "http://localhost:5000/places";
         },
-        error: function (data, status) {
+        error: function (xhr, status, error) {
           console.log("Error creating new User");
-          console.error(data);
+          console.error(xhr);
+          console.error(error);
         },
       });
     }

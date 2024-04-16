@@ -32,7 +32,7 @@ def all_place():
     cache_id = uuid.uuid4()
 
 
-    return render_template("/places/show_place.html", cache_id=cache_id)
+    return render_template("/places/all_places.html", cache_id=cache_id)
 
 
 @place_views.route('/places/<place_id>', strict_slashes=False)

@@ -1,7 +1,18 @@
 $(document).ready(function () {
   console.log("Loading property page");
   const show_place_id = document.getElementById("show_place_id").value;
-  console.log(show_place_id);
+  // console.log(show_place_id);
+  // used to load the user
+  function loadUser(user) {
+    if (user) {
+      // console.log(user);
+      $("#user_info").empty();
+      let newEl = `
+      <a href="#" class="d-block">${user.first_name} ${user.last_name}</a>
+      `;
+      $("#user_info").append(newEl);
+    }
+  }
   /* 
     Loading User who posted the place.
     and the property.
@@ -16,7 +27,7 @@ $(document).ready(function () {
       contentType: "application/json",
       data: JSON.stringify(requestData),
       success: function (data, status) {
-        console.log(data);
+        // console.log(data);
         // remove the loading page information and show the property.
         $("#loading").addClass("d-none");
         $("#loading_error").addClass("d-none");
@@ -159,4 +170,6 @@ $(document).ready(function () {
   }
   /* functions to run once this script gets loaded */
   index();
+  // localStorage.clear();
+  loadUser(JSON.parse(localStorage.getItem("user")));
 });

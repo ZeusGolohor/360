@@ -1,5 +1,16 @@
 $(document).ready(function () {
   console.log("about to load places");
+  // used to load the user
+  function loadUser(user) {
+    if (user) {
+      // console.log(user);
+      $("#user_info").empty();
+      let newEl = `
+      <a href="#" class="d-block">${user.first_name} ${user.last_name}</a>
+      `;
+      $("#user_info").append(newEl);
+    }
+  }
   /*
    load all places
    Data to be sent in the request body.
@@ -41,10 +52,10 @@ $(document).ready(function () {
             </ol>
             <div class="carousel-inner place_list_img">
                   <div class="carousel-item active">
-                    <img class="d-block w-100 all_place_img" src="../static/images/dark-color-interiors-1200x520.jpg?{{ cache_id}}" alt="First slide">
+                    <img class="d-block w-100 all_place_img" src="../static/images/black-and-white-living-room.jpg?{{ cache_id}}" alt="First slide">
                   </div>
                   <div class="carousel-item">
-                    <img class="d-block w-100 all_place_img" src="../static/images/spiderman-001.jpg?{{ cache_id}}" alt="Second slide">
+                    <img class="d-block w-100 all_place_img" src="../static/images/dark-color-interiors-1200x520.jpg?{{ cache_id}}" alt="Second slide">
                   </div>
                   <div class="carousel-item">
                     <img class="d-block w-100 all_place_img" src="../static/images/edyta-and-co-layout-1549663065.jpg?{{ cache_id}}" alt="Third slide">
@@ -91,7 +102,7 @@ $(document).ready(function () {
             <div class="row">
             <div class="col-6">
             <!-- <i class="nav-icon fas fa-star text-danger"></i> -->
-            <h5>$ ${place.price_by_night}</h5>
+            <h5>₦${place.price_by_night}</h5>
             </div>
             <div class="col-6">
             <a href="http://localhost:5000/places/${
@@ -118,4 +129,6 @@ $(document).ready(function () {
     });
   }
   loadAllPlaces();
+  // localStorage.clear();
+  loadUser(JSON.parse(localStorage.getItem("user")));
 });

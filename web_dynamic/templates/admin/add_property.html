@@ -101,36 +101,53 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item menu-open">
+               <li class="nav-item">
+                <a href="http://localhost:5000/places" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>
+                    All Properties
+                    <span class="right badge badge-danger">New</span>
+                  </p>
+                </a>
+              </li>
+          <li class="nav-item menu-closed">
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               
               <p>
-                Starter Pages
+                Admin Pages
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
+
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link active">
+                <a href="http://localhost:5000/admin/properties/new" class="nav-link active">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Active Page</p>
+                  <p>Add Property</p>
                 </a>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Inactive Page</p>
                 </a>
-              </li>
+              </li> -->
             </ul>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+            <a href="http://localhost:5000/login" class="nav-link">
+              <i class="nav-icon fas fa-lock"></i>
               <p>
-                Simple Link
-                <span class="right badge badge-danger">New</span>
+                Login
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="http://localhost:5000/register" class="nav-link">
+              <i class="nav-icon fas fa-lock"></i>
+              <p>
+                Register
               </p>
             </a>
           </li>
@@ -179,14 +196,17 @@
             <div class="card-body">
               <div class="form-group">
                 <label for="name">Property Name</label>
+                <div id="name_error" class="col-12 bg-danger"></div>
                 <input type="text" id="name" name="name" class="form-control">
               </div>
               <div class="form-group">
                 <label for="description">Project Description</label>
+                <div id="description_error" class="col-12 bg-danger"></div>
                 <textarea id="description" name="description" class="form-control" rows="4"></textarea>
               </div>
               <div class="form-group">
                 <label for="state">Property State</label>
+                <div id="state_error" class="col-12 bg-danger"></div>
                 <select id="state" name="state" class="form-control custom-select" data-loaded="false">
                   <option selected disabled>Select a state</option>
                   <option>Loading...</option>
@@ -194,6 +214,7 @@
               </div>
               <div class="form-group">
                 <label for="city">Property City</label>
+                <div id="city_error" class="col-12 bg-danger"></div>
                 <select id="city" name="city" class="form-control custom-select">
                   <option selected disabled>Select a city</option>
                   <option disabled>Select a state first</option>
@@ -204,12 +225,14 @@
                   <div class="col-md-12 col-lg-6">
                     <div class="form-group">
                       <label for="number_rooms">Property Number Bedrooms</label>
+                      <div id="number_rooms_error" class="col-12 bg-danger"></div>
                       <input type="text" id="number_rooms" name="number_rooms" class="form-control" >
                     </div>
                   </div>
                   <div class="col-md-12 col-lg-6">
                     <div class="form-group">
                       <label for="number_bathrooms">Property Number Bathrooms</label>
+                      <div id="number_bathrooms_error" class="col-12 bg-danger"></div>
                       <input type="text" id="number_bathrooms" name="number_bathrooms" class="form-control">
                     </div>
                   </div>
@@ -217,6 +240,7 @@
               </div>
               <div class="form-group col-md-12 col-lg-6">
                 <label for="price_by_night">Property Price</label>
+                <div id="price_by_night_error" class="col-12 bg-danger"></div>
                 <input type="text" id="price_by_night" name="price_by_night"  class="form-control">
               </div>
             <!-- /.card-body -->
