@@ -12,7 +12,6 @@ from os import getenv
 
 
 @place_views.route('/', strict_slashes=False)
-@place_views.route('/', strict_slashes=False)
 def status():
     """
     A method to check the application status.
@@ -20,7 +19,7 @@ def status():
     # # To avoid flask caching
     cache_id = uuid.uuid4()
 
-    return render_template("/places/all_places.html", cache_id=cache_id)
+    return render_template("/home/index.html", cache_id=cache_id)
 
 
 @place_views.route('/places', strict_slashes=False)
