@@ -1,5 +1,7 @@
 #!/usr/bin/javascript
 $(document).ready(function () {
+  // setting the url for api calls
+  const url = "http://localhost:5001";
   let formData = {};
   formData["errors"] = false;
   formData["loaded"] = false;
@@ -46,7 +48,7 @@ $(document).ready(function () {
       console.log(JSON.parse(localStorage.getItem("formData")));
       //creating the new property
       $.ajax({
-        url: `http://localhost:5001/api/v1/cities/${formData["city"]}/places`,
+        url: `${url}/api/v1/cities/${formData["city"]}/places`,
         type: "POST",
         contentType: "application/json",
         // "Access-Control-Allow-Origin": "*",
@@ -101,7 +103,7 @@ $(document).ready(function () {
       return;
     }
     $.ajax({
-      url: `http://localhost:5001/api/v1/states/${state_id}/cities`,
+      url: `${url}/api/v1/states/${state_id}/cities`,
       type: "GET",
       contentType: "application/json",
       data: "",
@@ -141,7 +143,7 @@ $(document).ready(function () {
     if (data["loaded"] === "false") {
       // loading all states
       $.ajax({
-        url: "http://localhost:5001/api/v1/states",
+        url: "${url}/api/v1/states",
         type: "GET",
         contentType: "application/json",
         data: "",

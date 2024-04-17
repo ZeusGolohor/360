@@ -17,6 +17,7 @@ from os import getenv
 import sqlalchemy
 from sqlalchemy import create_engine, desc
 from sqlalchemy.orm import scoped_session, sessionmaker
+import pymysql
 
 classes = {"Amenity": Amenity, "City": City,
            "Place": Place, "Review": Review, "State": State, "User": User,
@@ -35,7 +36,12 @@ class DBStorage:
         MYSQL_HOST = getenv('MYSQL_HOST')
         MYSQL_DB = getenv('MYSQL_DB')
         ENV = getenv('ENV')
-        self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.
+        # self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.
+        #                               format(MYSQL_USER,
+        #                                      MYSQL_PWD,
+        #                                      MYSQL_HOST,
+        #                                      MYSQL_DB))
+        self.__engine = create_engine('mysql+pymysql://{}:{}@{}/{}'.
                                       format(MYSQL_USER,
                                              MYSQL_PWD,
                                              MYSQL_HOST,

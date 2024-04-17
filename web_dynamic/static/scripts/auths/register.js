@@ -1,4 +1,7 @@
 $(document).ready(function () {
+  // setting the url for api calls
+  const url = "http://localhost:5001";
+  const url2 = "http://localhost:5000";
   // Used to clear old form errors.
   function clear_previous_errors(formData) {
     for (let key in formData) {
@@ -61,7 +64,7 @@ $(document).ready(function () {
       console.log("sending form");
       //creating the new user
       $.ajax({
-        url: `http://localhost:5001/api/v1/users`,
+        url: `${url}/api/v1/users`,
         type: "POST",
         contentType: "application/json",
         data: JSON.stringify(formData),
@@ -70,7 +73,7 @@ $(document).ready(function () {
           user = data;
           localStorage.setItem("user", JSON.stringify(user));
 
-          window.location = "http://localhost:5000/places";
+          window.location = `${url2}/places`;
         },
         error: function (xhr, status, error) {
           console.log("Error creating new User");

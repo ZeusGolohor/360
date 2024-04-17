@@ -1,4 +1,7 @@
 $(document).ready(function () {
+  // setting the url for api calls
+  const url = "http://localhost:5001";
+  const url2 = "http://localhost:5000";
   console.log("about to load places");
   // used to load the user
   function loadUser(user) {
@@ -24,7 +27,7 @@ $(document).ready(function () {
     };
     console.log("Loading Places");
     $.ajax({
-      url: "http://localhost:5001/api/v1/places_search",
+      url: `${url}/api/v1/places_search`,
       type: "POST",
       contentType: "application/json",
       data: JSON.stringify(requestData),
@@ -105,7 +108,7 @@ $(document).ready(function () {
             <h5>₦${place.price_by_night}</h5>
             </div>
             <div class="col-6">
-            <a href="http://localhost:5000/places/${
+            <a href="${url2}/places/${
               place.id
             }" class="btn btn-info float-right">View Property</a>
             </div>

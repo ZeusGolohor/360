@@ -1,5 +1,7 @@
 $(document).ready(function () {
   console.log("Loading property page");
+  // setting the url for api calls
+  const url = "http://localhost:5001";
   const show_place_id = document.getElementById("show_place_id").value;
   // console.log(show_place_id);
   // used to load the user
@@ -22,7 +24,7 @@ $(document).ready(function () {
       url: show_place_id,
     };
     $.ajax({
-      url: `http://localhost:5001/api/v1/places/${show_place_id}`,
+      url: `${url}/api/v1/places/${show_place_id}`,
       type: "GET",
       contentType: "application/json",
       data: JSON.stringify(requestData),

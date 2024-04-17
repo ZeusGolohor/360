@@ -1,4 +1,6 @@
 $(document).ready(function () {
+  // setting the url for api calls
+  const url = "http://localhost:5001";
   // Used to clear old form errors.
   function clear_previous_errors(formData) {
     for (let key in formData) {
@@ -45,7 +47,7 @@ $(document).ready(function () {
     check_len_0(formData);
     if (formData["errors"] == false) {
       $.ajax({
-        url: `http://localhost:5001/api/v1/auths/login`,
+        url: `${url}/api/v1/auths/login`,
         type: "POST",
         contentType: "application/json",
         data: JSON.stringify(formData),
