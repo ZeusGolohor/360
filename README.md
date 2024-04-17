@@ -7,16 +7,18 @@ RentHub Media aims to streamline property rentals for landlords and tenants by p
 ## Team Members
 
 - **Bukola Egberongbe**
-  - *Role*: Frontend Developer
-  - *Reason for role*: Experience with front-end development.
+
+  - _Role_: Frontend Developer
+  - _Reason for role_: Experience with front-end development.
 
 - **AHILE Shagba Francis**
-  - *Role*: Project Manager
-  - *Reason for role*: Experience in project management.
+
+  - _Role_: Project Manager
+  - _Reason for role_: Experience in project management.
 
 - **Ufuoma Emmanuel Golohor**
-  - *Role*: Backend Developer
-  - *Reason for role*: Experience in backend development and web infrastructure management.
+  - _Role_: Backend Developer
+  - _Reason for role_: Experience in backend development and web infrastructure management.
 
 ## Target Audience
 
@@ -69,4 +71,3 @@ A seasoned full stack developer with over 8 years of experience, Ufuoma founded 
 ## LinkedIn Profile
 
 [LinkedIn Profile](https://www.linkedin.com/in/golohor-ufuoma-169209205)
-
